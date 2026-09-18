@@ -67,7 +67,7 @@ require_once __DIR__ . '/../includes/header.php';
                     </div>
 
                     <?php if ($product['stok'] > 0): ?>
-                        <form action="<?= $base_url ?>/frontend/proses/proses_keranjang.php" method="POST">
+                        <form action="<?= $base_url ?>/frontend/proses/proses_keranjang.php" method="POST" id="form-add-to-cart">
                             <input type="hidden" name="action" value="add">
                             <input type="hidden" name="id_product" value="<?= $product['id_product'] ?>">
                             
@@ -85,7 +85,7 @@ require_once __DIR__ . '/../includes/header.php';
                             </div>
 
                             <div class="d-flex gap-2 flex-wrap" style="gap: 0.8rem;">
-                                <button type="submit" class="btn btn-primary-cipamilk">
+                                <button type="submit" class="btn btn-primary-cipamilk" id="btn-add-to-cart">
                                     <i class="fas fa-cart-plus mr-2"></i> Tambah ke Keranjang
                                 </button>
                                 <a href="<?= $base_url ?>/frontend/subscription.php?produk=<?= $product['id_product'] ?>" class="btn btn-accent-cipamilk">

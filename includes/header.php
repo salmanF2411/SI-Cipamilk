@@ -65,11 +65,9 @@ $current_page = basename($_SERVER['PHP_SELF'], '.php');
 
                 <?php if (isLoggedIn() && $_SESSION['role'] === 'customer'): ?>
                     <li class="nav-item">
-                        <a class="nav-link btn-nav-cart <?= $current_page === 'keranjang' ? 'active' : '' ?>" href="<?= $base_url ?>/frontend/keranjang.php">
+                        <a class="nav-link btn-nav-cart <?= $current_page === 'keranjang' ? 'active' : '' ?>" href="<?= $base_url ?>/frontend/keranjang.php" id="nav-cart-btn" title="Keranjang Belanja">
                             <i class="fas fa-shopping-cart"></i>
-                            <?php if ($cart_count > 0): ?>
-                                <span class="cart-badge"><?= $cart_count ?></span>
-                            <?php endif; ?>
+                            <span class="cart-badge" id="nav-cart-badge" style="<?= $cart_count > 0 ? '' : 'display: none;' ?>"><?= $cart_count ?></span>
                         </a>
                     </li>
                     <li class="nav-item dropdown">

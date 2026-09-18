@@ -208,7 +208,96 @@ img {
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: transform 0.2s ease;
 }
+
+@keyframes cartBump {
+    0% { transform: scale(1); }
+    30% { transform: scale(1.5); }
+    60% { transform: scale(0.9); }
+    100% { transform: scale(1); }
+}
+
+.cart-badge.bump {
+    animation: cartBump 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* ============================================
+   FLOATING TOAST NOTIFICATION
+   ============================================ */
+.cipamilk-toast {
+    position: fixed;
+    top: 90px;
+    right: 25px;
+    background: #ffffff;
+    color: #2D3436;
+    padding: 14px 20px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15), 0 2px 8px rgba(0,0,0,0.06);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    z-index: 99999;
+    font-size: 0.92rem;
+    font-weight: 600;
+    border-left: 5px solid #2ECC71;
+    transform: translateX(120%);
+    opacity: 0;
+    transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    max-width: 90vw;
+}
+
+.cipamilk-toast.show {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.cipamilk-toast i {
+    font-size: 1.25rem;
+    color: #2ECC71;
+}
+
+.cipamilk-toast.toast-error {
+    border-left-color: #E74C3C;
+}
+
+.cipamilk-toast.toast-error i {
+    color: #E74C3C;
+}
+
+.cipamilk-toast .toast-btn {
+    margin-left: 8px;
+    padding: 5px 12px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    background: var(--primary);
+    color: #fff !important;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: 0.2s ease;
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+}
+
+.cipamilk-toast .toast-btn:hover {
+    background: var(--primary-dark);
+    transform: translateY(-1px);
+}
+
+@media (max-width: 575px) {
+    .cipamilk-toast {
+        top: 75px;
+        right: 15px;
+        left: 15px;
+        max-width: none;
+        transform: translateY(-40px);
+    }
+    .cipamilk-toast.show {
+        transform: translateY(0);
+    }
+}
+
 
 /* ============================================
    HERO SECTION

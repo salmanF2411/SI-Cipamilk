@@ -157,4 +157,127 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
+    // ============================================
+    // Toast Notification Helper
+    // ============================================
+    window.showCipamilkToast = function(message, type = 'success', cartUrl = null) {
+        const existing = document.querySelector('.cipamilk-toast');
+        if (existing) {
+            existing.remove();
+        }
+
+        const toast = document.createElement('div');
+        toast.className = `cipamilk-toast toast-${type}`;
+
+        const icon = type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle';
+        let btnHtml = '';
+        if (cartUrl && type === 'success') {
+            btnHtml = `<a href="${cartUrl}" class="toast-btn"><i class="fas fa-shopping-cart mr-1"></i> Lihat Keranjang</a>`;
+        }
+
+        toast.innerHTML = `
+            <i class="fas ${icon}"></i>
+            <span class="toast-message">${message}</span>
+            ${btnHtml}
+        `;
+
+        document.body.appendChild(toast);
+
+        // Animate entrance
+        requestAnimationFrame(() => {
+            toast.classList.add('show');
+        });
+
+        // Auto dismiss
+        setTimeout(() => {
+            toast.classList.remove('show');
+            setTimeout(() => toast.remove(), 400);
+        }, 4000);
+    };
+
+    // ============================================
+    // AJAX Add to Cart (Stay on Product Page)
+    // ============================================
+    const addToCartForm = document.getElementById('form-add-to-cart');
+    if (addToCartForm) {
+        addToCartForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalBtnHtml = submitBtn ? submitBtn.innerHTML : '';
+
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Menambahkan...';
+            }
+
+            const formData = new FormData(this);
+            formData.append('ajax', '1');
+
+            fetch(this.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'Accept': 'application/json'
+                }
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network error ' + response.status);
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.success) {
+                    // Update cart badge in navbar
+                    const badge = document.getElementById('nav-cart-badge');
+                    if (badge) {
+                        badge.textContent = data.cart_count;
+                        badge.style.display = 'flex';
+                        badge.classList.remove('bump');
+                        // Force DOM reflow to re-trigger CSS animation
+                        void badge.offsetWidth;
+                        badge.classList.add('bump');
+                    }
+
+                    // Show notification
+                    const cartLink = document.getElementById('nav-cart-btn') ? document.getElementById('nav-cart-btn').href : null;
+                    showCipamilkToast(data.message || 'Produk berhasil ditambahkan ke keranjang!', 'success', cartLink);
+
+                    // Button feedback
+                    if (submitBtn) {
+                        submitBtn.innerHTML = '<i class="fas fa-check mr-2"></i> Berhasil Ditambahkan!';
+                        submitBtn.classList.remove('btn-primary-cipamilk');
+                        submitBtn.classList.add('btn-success');
+                        setTimeout(() => {
+                            submitBtn.innerHTML = originalBtnHtml;
+                            submitBtn.classList.remove('btn-success');
+                            submitBtn.classList.add('btn-primary-cipamilk');
+                            submitBtn.disabled = false;
+                        }, 1800);
+                    }
+                } else {
+                    if (data.redirect) {
+                        showCipamilkToast(data.message || 'Silakan login terlebih dahulu.', 'error');
+                        setTimeout(() => {
+                            window.location.href = data.redirect;
+                        }, 1200);
+                    } else {
+                        showCipamilkToast(data.message || 'Gagal menambahkan produk.', 'error');
+                        if (submitBtn) {
+                            submitBtn.innerHTML = originalBtnHtml;
+                            submitBtn.disabled = false;
+                        }
+                    }
+                }
+            })
+            .catch(err => {
+                console.warn('AJAX cart add failed, falling back to standard submit:', err);
+                // Fallback: submit standard form
+                addToCartForm.submit();
+            });
+        });
+    }
+
 });

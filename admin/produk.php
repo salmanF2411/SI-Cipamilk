@@ -144,13 +144,13 @@ if (isset($_GET['edit'])) {
                                 <table class="table table-hover align-middle mb-0">
                                     <thead style="background: #f8fafc; border-bottom: 2px solid #e2e8f0;">
                                         <tr>
-                                            <th style="width: 40px; text-align: center; vertical-align: middle;">#</th>
+                                            <th style="width: 50px; text-align: center; vertical-align: middle;">#</th>
                                             <th style="vertical-align: middle;">Produk</th>
-                                            <th style="width: 80px; text-align: center; vertical-align: middle;">Gambar
+                                            <th style="width: 150px; text-align: center; vertical-align: middle;">Gambar
                                             </th>
                                             <th style="vertical-align: middle;">Kategori</th>
                                             <th style="vertical-align: middle;">Harga</th>
-                                            <th style="width: 70px; text-align: center; vertical-align: middle;">Stok
+                                            <th style="width: 120px; text-align: center; vertical-align: middle;">Stok
                                             </th>
                                             <th style="width: 100px; text-align: center; vertical-align: middle;">Aksi
                                             </th>
@@ -161,7 +161,8 @@ if (isset($_GET['edit'])) {
                                             <tr style="border-bottom: 1px solid #f1f5f9;">
                                                 <td style="text-align: center; vertical-align: middle;"><?= $i + 1 ?></td>
                                                 <td style="vertical-align: middle;">
-                                                    <strong><?= htmlspecialchars($p['nama_produk']) ?></strong></td>
+                                                    <strong><?= htmlspecialchars($p['nama_produk']) ?></strong>
+                                                </td>
                                                 <td style="text-align: center; vertical-align: middle;">
                                                     <?php if (!empty($p['gambar'])): ?>
                                                         <img src="<?= $base_url ?>/assets/images/products/<?= htmlspecialchars($p['gambar']) ?>"

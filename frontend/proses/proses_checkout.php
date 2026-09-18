@@ -50,16 +50,12 @@ try {
     $stmt->execute([$id_customer, $total, $alamat, $nomor_telepon]);
     $id_order = $pdo->lastInsertId();
 
-    // Insert order details & kurangi stok
+    // Insert order details (stok belum dikurangi sampai status pesanan menjadi 'selesai')
     foreach ($cart_items as $item) {
         $subtotal = $item['harga'] * $item['jumlah'];
         
         $stmt = $pdo->prepare("INSERT INTO order_details (id_order, id_product, jumlah, subtotal) VALUES (?, ?, ?, ?)");
         $stmt->execute([$id_order, $item['id_product'], $item['jumlah'], $subtotal]);
-
-        // Kurangi stok
-        $stmt = $pdo->prepare("UPDATE products SET stok = stok - ? WHERE id_product = ?");
-        $stmt->execute([$item['jumlah'], $item['id_product']]);
     }
 
     // Hapus keranjang
@@ -68,6 +64,14 @@ try {
 
     $pdo->commit();
 
+    $_SESSION['order_success'] = [
+        'id_order'     => $id_order,
+        'order_number' => '#ORD-' . str_pad($id_order, 5, '0', STR_PAD_LEFT),
+        'total'        => $total,
+        'alamat'       => $alamat,
+        'nomor_telepon'=> $nomor_telepon,
+        'items_count'  => count($cart_items)
+    ];
     $_SESSION['success'] = 'Pesanan berhasil dibuat! No. Pesanan: #ORD-' . str_pad($id_order, 5, '0', STR_PAD_LEFT);
     redirect($base_url . '/frontend/pesanan.php');
 

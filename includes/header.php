@@ -103,21 +103,30 @@ $current_page = basename($_SERVER['PHP_SELF'], '.php');
     </div>
 </nav>
 
-<!-- Flash Messages -->
-<?php if (isset($_SESSION['success'])): ?>
-    <div class="container mt-3">
-        <div class="alert-cipamilk alert-success-cipamilk">
-            <i class="fas fa-check-circle"></i>
-            <?= $_SESSION['success']; unset($_SESSION['success']); ?>
+<!-- Floating Pop-up Notifications Container (Overlay - Tidak Merusak Layout UI) -->
+<div class="cipamilk-popup-container" id="cipamilkPopupContainer">
+    <?php if (isset($_SESSION['success'])): ?>
+        <div class="cipamilk-popup popup-success" role="alert">
+            <div class="popup-icon"><i class="fas fa-check-circle"></i></div>
+            <div class="popup-content">
+                <div class="popup-title">Berhasil!</div>
+                <div class="popup-msg"><?= htmlspecialchars($_SESSION['success']); ?></div>
+            </div>
+            <button type="button" class="popup-close-btn" onclick="closeCipamilkPopup(this)">&times;</button>
         </div>
-    </div>
-<?php endif; ?>
+        <?php unset($_SESSION['success']); ?>
+    <?php endif; ?>
 
-<?php if (isset($_SESSION['error'])): ?>
-    <div class="container mt-3">
-        <div class="alert-cipamilk alert-danger-cipamilk">
-            <i class="fas fa-exclamation-circle"></i>
-            <?= $_SESSION['error']; unset($_SESSION['error']); ?>
+    <?php if (isset($_SESSION['error'])): ?>
+        <div class="cipamilk-popup popup-danger" role="alert">
+            <div class="popup-icon"><i class="fas fa-exclamation-circle"></i></div>
+            <div class="popup-content">
+                <div class="popup-title">Pemberitahuan</div>
+                <div class="popup-msg"><?= htmlspecialchars($_SESSION['error']); ?></div>
+            </div>
+            <button type="button" class="popup-close-btn" onclick="closeCipamilkPopup(this)">&times;</button>
         </div>
-    </div>
-<?php endif; ?>
+        <?php unset($_SESSION['error']); ?>
+    <?php endif; ?>
+</div>
+

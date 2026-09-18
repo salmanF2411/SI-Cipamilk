@@ -91,16 +91,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // ============================================
-    // Alert auto-dismiss
-    // ============================================
-    document.querySelectorAll('.alert-cipamilk').forEach(alert => {
-        setTimeout(() => {
-            alert.style.opacity = '0';
-            alert.style.transform = 'translateY(-10px)';
-            setTimeout(() => alert.remove(), 300);
-        }, 4000);
-    });
 
     // ============================================
     // Category filter
@@ -158,41 +148,70 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // ============================================
-    // Toast Notification Helper
+    // Floating Pop-up Notifications
     // ============================================
-    window.showCipamilkToast = function(message, type = 'success', cartUrl = null) {
-        const existing = document.querySelector('.cipamilk-toast');
-        if (existing) {
-            existing.remove();
+    function setupPopupDismiss(popup) {
+        if (!popup) return;
+        setTimeout(() => {
+            if (popup && popup.parentElement) {
+                popup.classList.add('hiding');
+                setTimeout(() => popup.remove(), 350);
+            }
+        }, 4500);
+    }
+
+    // Auto-dismiss any popups rendered on page load
+    document.querySelectorAll('.cipamilk-popup').forEach(popup => {
+        setupPopupDismiss(popup);
+    });
+
+    window.closeCipamilkPopup = function(btn) {
+        const popup = btn.closest('.cipamilk-popup');
+        if (popup) {
+            popup.classList.add('hiding');
+            setTimeout(() => popup.remove(), 350);
+        }
+    };
+
+    window.showCipamilkPopup = function(message, type = 'success', actionBtn = null) {
+        let container = document.getElementById('cipamilkPopupContainer');
+        if (!container) {
+            container = document.createElement('div');
+            container.id = 'cipamilkPopupContainer';
+            container.className = 'cipamilk-popup-container';
+            document.body.appendChild(container);
         }
 
-        const toast = document.createElement('div');
-        toast.className = `cipamilk-toast toast-${type}`;
+        const popup = document.createElement('div');
+        popup.className = `cipamilk-popup popup-${type === 'error' ? 'danger' : 'success'}`;
+        popup.setAttribute('role', 'alert');
 
-        const icon = type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle';
+        const icon = type === 'error' ? 'fa-exclamation-circle' : 'fa-check-circle';
+        const title = type === 'error' ? 'Pemberitahuan' : 'Berhasil!';
+
         let btnHtml = '';
-        if (cartUrl && type === 'success') {
-            btnHtml = `<a href="${cartUrl}" class="toast-btn"><i class="fas fa-shopping-cart mr-1"></i> Lihat Keranjang</a>`;
+        if (actionBtn && actionBtn.url) {
+            btnHtml = `<a href="${actionBtn.url}" class="popup-action-btn"><i class="fas fa-shopping-cart mr-1"></i> ${actionBtn.text || 'Lihat'}</a>`;
         }
 
-        toast.innerHTML = `
-            <i class="fas ${icon}"></i>
-            <span class="toast-message">${message}</span>
-            ${btnHtml}
+        popup.innerHTML = `
+            <div class="popup-icon"><i class="fas ${icon}"></i></div>
+            <div class="popup-content">
+                <div class="popup-title">${title}</div>
+                <div class="popup-msg">${message}</div>
+                ${btnHtml}
+            </div>
+            <button type="button" class="popup-close-btn" onclick="closeCipamilkPopup(this)">&times;</button>
         `;
 
-        document.body.appendChild(toast);
+        container.appendChild(popup);
+        setupPopupDismiss(popup);
+    };
 
-        // Animate entrance
-        requestAnimationFrame(() => {
-            toast.classList.add('show');
-        });
-
-        // Auto dismiss
-        setTimeout(() => {
-            toast.classList.remove('show');
-            setTimeout(() => toast.remove(), 400);
-        }, 4000);
+    // Alias for compatibility
+    window.showCipamilkToast = function(message, type = 'success', cartUrl = null) {
+        const btn = cartUrl ? { url: cartUrl, text: 'Lihat Keranjang' } : null;
+        window.showCipamilkPopup(message, type, btn);
     };
 
     // ============================================
@@ -241,9 +260,9 @@ document.addEventListener('DOMContentLoaded', function() {
                         badge.classList.add('bump');
                     }
 
-                    // Show notification
+                    // Show pop-up notification without affecting layout
                     const cartLink = document.getElementById('nav-cart-btn') ? document.getElementById('nav-cart-btn').href : null;
-                    showCipamilkToast(data.message || 'Produk berhasil ditambahkan ke keranjang!', 'success', cartLink);
+                    showCipamilkPopup(data.message || 'Produk berhasil ditambahkan ke keranjang!', 'success', cartLink ? { url: cartLink, text: 'Lihat Keranjang' } : null);
 
                     // Button feedback
                     if (submitBtn) {
@@ -259,12 +278,12 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 } else {
                     if (data.redirect) {
-                        showCipamilkToast(data.message || 'Silakan login terlebih dahulu.', 'error');
+                        showCipamilkPopup(data.message || 'Silakan login terlebih dahulu.', 'error');
                         setTimeout(() => {
                             window.location.href = data.redirect;
                         }, 1200);
                     } else {
-                        showCipamilkToast(data.message || 'Gagal menambahkan produk.', 'error');
+                        showCipamilkPopup(data.message || 'Gagal menambahkan produk.', 'error');
                         if (submitBtn) {
                             submitBtn.innerHTML = originalBtnHtml;
                             submitBtn.disabled = false;
@@ -274,7 +293,6 @@ document.addEventListener('DOMContentLoaded', function() {
             })
             .catch(err => {
                 console.warn('AJAX cart add failed, falling back to standard submit:', err);
-                // Fallback: submit standard form
                 addToCartForm.submit();
             });
         });

@@ -11,18 +11,17 @@ $produk_unggulan = $stmt->fetchAll();
 
 // Ambil statistik
 $total_produk = $pdo->query("SELECT COUNT(*) FROM products")->fetchColumn();
-$total_customer = $pdo->query("SELECT COUNT(*) FROM customers")->fetchColumn();
-$total_subscription = $pdo->query("SELECT COUNT(*) FROM subscriptions WHERE status = 'aktif'")->fetchColumn();
 
 require_once __DIR__ . '/../includes/header.php';
 ?>
 
 <!-- Hero Section -->
-<section class="hero-section">
+<section class="hero-section" style="padding: 60px 0; overflow: hidden;">
     <div class="container">
         <div class="row align-items-center">
-            <div class="col-lg-6">
-                <div class="hero-content">
+            <!-- Kolom Kiri: Teks & Informasi -->
+            <div class="col-lg-6 mb-5 mb-lg-0">
+                <div class="hero-content pr-lg-3">
                     <div class="hero-badge">
                         <i class="fas fa-leaf"></i> 100% Susu Segar Alami
                     </div>
@@ -45,24 +44,33 @@ require_once __DIR__ . '/../includes/header.php';
                     <div class="hero-stats">
                         <div class="hero-stat">
                             <div class="hero-stat-number"><?= $total_produk ?>+</div>
-                            <div class="hero-stat-label">Produk</div>
+                            <div class="hero-stat-label">Pilihan Produk</div>
                         </div>
                         <div class="hero-stat">
-                            <div class="hero-stat-number"><?= $total_customer ?>+</div>
-                            <div class="hero-stat-label">Pelanggan</div>
+                            <div class="hero-stat-number">100%</div>
+                            <div class="hero-stat-label">Alami & Segar</div>
                         </div>
                         <div class="hero-stat">
-                            <div class="hero-stat-number"><?= $total_subscription ?>+</div>
-                            <div class="hero-stat-label">Subscriber</div>
+                            <div class="hero-stat-number">Grade A</div>
+                            <div class="hero-stat-label">Kualitas Terjamin</div>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <!-- Kolom Kanan: Foto Produk Lebih Besar & Pas -->
             <div class="col-lg-6">
-                <div class="hero-image text-center">
-                    <img src="<?= $base_url ?>/assets/images/uploads/cipamilk.jpg" alt="Cipamilk Products"
-                        class="img-fluid"
-                        onerror="this.parentElement.innerHTML='<div style=\'width:100%;height:400px;background:linear-gradient(135deg,rgba(77,168,218,0.1),rgba(244,201,93,0.1));border-radius:16px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:1rem;\'><i class=\'fas fa-glass-whiskey\' style=\'font-size:5rem;color:#4DA8DA;\'></i><span style=\'font-family:Poppins;font-weight:700;color:#4DA8DA;font-size:1.5rem;\'>Cipamilk</span><span style=\'color:#636E72;\'>Olahan Susu Segar</span></div>'">
+                <div class="hero-image-container"
+                    style="position: relative; width: 100%; max-width: 540px; margin: 0 auto;">
+
+                    <!-- Frame Gambar Utama -->
+                    <div
+                        style="width: 100%; height: 440px; border-radius: 28px; overflow: hidden; box-shadow: 0 20px 40px -10px rgba(77, 168, 218, 0.28); border: 4px solid #ffffff; background: #fff;">
+                        <img src="<?= $base_url ?>/assets/images/uploads/cipamilk.jpg"
+                            alt="Cipamilk Fresh Dairy Products"
+                            style="width: 100%; height: 100%; object-fit: cover; object-position: center; display: block;"
+                            onerror="this.parentElement.innerHTML='<div style=\'width:100%;height:100%;background:linear-gradient(135deg,rgba(77,168,218,0.1),rgba(244,201,93,0.1));border-radius:24px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:1rem;\'><i class=\'fas fa-glass-whiskey\' style=\'font-size:5rem;color:#4DA8DA;\'></i><span style=\'font-family:Poppins;font-weight:700;color:#4DA8DA;font-size:1.5rem;\'>Cipamilk</span><span style=\'color:#636E72;\'>Olahan Susu Segar</span></div>'">
+                    </div>
                 </div>
             </div>
         </div>

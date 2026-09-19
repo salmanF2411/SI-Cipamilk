@@ -60,7 +60,8 @@ require_once __DIR__ . '/../includes/header.php';
             </div>
             <div class="col-lg-6">
                 <div class="hero-image text-center">
-                    <img src="<?= $base_url ?>/assets/images/hero-milk.png" alt="Cipamilk Products" class="img-fluid"
+                    <img src="<?= $base_url ?>/assets/images/uploads/cipamilk.jpg" alt="Cipamilk Products"
+                        class="img-fluid"
                         onerror="this.parentElement.innerHTML='<div style=\'width:100%;height:400px;background:linear-gradient(135deg,rgba(77,168,218,0.1),rgba(244,201,93,0.1));border-radius:16px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:1rem;\'><i class=\'fas fa-glass-whiskey\' style=\'font-size:5rem;color:#4DA8DA;\'></i><span style=\'font-family:Poppins;font-weight:700;color:#4DA8DA;font-size:1.5rem;\'>Cipamilk</span><span style=\'color:#636E72;\'>Olahan Susu Segar</span></div>'">
                 </div>
             </div>
@@ -141,7 +142,8 @@ require_once __DIR__ . '/../includes/header.php';
         <div class="row align-items-center">
             <div class="col-lg-6 mb-4 mb-lg-0 reveal-on-scroll">
                 <div class="about-image">
-                    <img src="<?= $base_url ?>/assets/images/about-farm.jpg" alt="Tentang Cipamilk" class="img-fluid"
+                    <img src="<?= $base_url ?>/assets/images/uploads/cipamilk.jpg" alt="Tentang Cipamilk"
+                        class="img-fluid"
                         onerror="this.parentElement.innerHTML='<div style=\'width:100%;height:350px;background:linear-gradient(135deg,rgba(79,119,45,0.1),rgba(244,201,93,0.1));border-radius:16px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:1rem;\'><i class=\'fas fa-tractor\' style=\'font-size:4rem;color:#4F772D;\'></i><span style=\'font-family:Poppins;font-weight:700;color:#4F772D;font-size:1.2rem;\'>Peternakan Cipamilk</span></div>'">
                 </div>
             </div>

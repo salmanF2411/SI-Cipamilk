@@ -21,10 +21,12 @@ $current_page = basename($_SERVER['PHP_SELF'], '.php');
 ?>
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Cipamilk — E-Commerce Olahan Susu Segar. Pesan susu segar, yogurt, keju, dan es krim langsung dari peternakan.">
+    <meta name="description"
+        content="Cipamilk — E-Commerce Olahan Susu Segar. Pesan susu segar, yogurt, keju, dan es krim langsung dari peternakan.">
     <title><?= $page_title ?? 'Cipamilk — Olahan Susu Segar' ?></title>
 
     <!-- Bootstrap 4 CSS -->
@@ -34,99 +36,105 @@ $current_page = basename($_SERVER['PHP_SELF'], '.php');
     <!-- Custom CSS -->
     <link rel="stylesheet" href="<?= $base_url ?>/assets/css/style.css">
 </head>
+
 <body>
 
-<!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-cipamilk">
-    <div class="container">
-        <a class="navbar-brand" href="<?= $base_url ?>/frontend/index.php">
-            <i class="fas fa-cow"></i> Cipamilk
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCipamilk">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarCipamilk">
-            <ul class="navbar-nav ml-auto align-items-lg-center">
-                <li class="nav-item">
-                    <a class="nav-link <?= $current_page === 'index' ? 'active' : '' ?>" href="<?= $base_url ?>/frontend/index.php">
-                        <i class="fas fa-home mr-1"></i> Home
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link <?= $current_page === 'produk' ? 'active' : '' ?>" href="<?= $base_url ?>/frontend/produk.php">
-                        <i class="fas fa-box-open mr-1"></i> Produk
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link <?= $current_page === 'subscription' ? 'active' : '' ?>" href="<?= $base_url ?>/frontend/subscription.php">
-                        <i class="fas fa-calendar-check mr-1"></i> Subscription
-                    </a>
-                </li>
-
-                <?php if (isLoggedIn() && $_SESSION['role'] === 'customer'): ?>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-cipamilk">
+        <div class="container">
+            <a class="navbar-brand" href="<?= $base_url ?>/frontend/index.php">
+                <i class="fas fa-cow"></i> Cipamilk
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCipamilk">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCipamilk">
+                <ul class="navbar-nav ml-auto align-items-lg-center">
                     <li class="nav-item">
-                        <a class="nav-link btn-nav-cart <?= $current_page === 'keranjang' ? 'active' : '' ?>" href="<?= $base_url ?>/frontend/keranjang.php" id="nav-cart-btn" title="Keranjang Belanja">
-                            <i class="fas fa-shopping-cart"></i>
-                            <span class="cart-badge" id="nav-cart-badge" style="<?= $cart_count > 0 ? '' : 'display: none;' ?>"><?= $cart_count ?></span>
+                        <a class="nav-link <?= $current_page === 'index' ? 'active' : '' ?>"
+                            href="<?= $base_url ?>/frontend/index.php">
+                            <i class="fas fa-home mr-1"></i> Home
                         </a>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
-                            <i class="fas fa-user-circle mr-1"></i> <?= htmlspecialchars($_SESSION['nama']) ?>
+                    <li class="nav-item">
+                        <a class="nav-link <?= $current_page === 'produk' ? 'active' : '' ?>"
+                            href="<?= $base_url ?>/frontend/produk.php">
+                            <i class="fas fa-box-open mr-1"></i> Produk
                         </a>
-                        <div class="dropdown-menu dropdown-menu-right">
-                            <?php if (isAdmin()): ?>
-                                <a class="dropdown-item" href="<?= $base_url ?>/admin/index.php" style="color: var(--primary); font-weight: 600;">
-                                    <i class="fas fa-tachometer-alt mr-2"></i> Panel Admin
-                                </a>
-                                <div class="dropdown-divider"></div>
-                            <?php else: ?>
-                                <a class="dropdown-item" href="<?= $base_url ?>/frontend/pesanan.php">
-                                    <i class="fas fa-receipt mr-2"></i> Pesanan Saya
-                                </a>
-                                <div class="dropdown-divider"></div>
-                            <?php endif; ?>
-                            <a class="dropdown-item" href="<?= $base_url ?>/frontend/proses/proses_logout.php">
-                                <i class="fas fa-sign-out-alt mr-2"></i> Logout
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link <?= $current_page === 'subscription' ? 'active' : '' ?>"
+                            href="<?= $base_url ?>/frontend/subscription.php">
+                            <i class="fas fa-calendar-check mr-1"></i> Subscription
+                        </a>
+                    </li>
+
+                    <?php if (isLoggedIn() && $_SESSION['role'] === 'customer'): ?>
+                        <li class="nav-item">
+                            <a class="nav-link btn-nav-cart <?= $current_page === 'keranjang' ? 'active' : '' ?>"
+                                href="<?= $base_url ?>/frontend/keranjang.php" id="nav-cart-btn" title="Keranjang Belanja">
+                                <i class="fas fa-shopping-cart"></i>
+                                <span class="cart-badge" id="nav-cart-badge"
+                                    style="<?= $cart_count > 0 ? '' : 'display: none;' ?>"><?= $cart_count ?></span>
                             </a>
-                        </div>
-                    </li>
-                <?php else: ?>
-                    <li class="nav-item ml-lg-2">
-                        <a class="nav-link btn-nav-login" href="<?= $base_url ?>/frontend/login.php">
-                            <i class="fas fa-sign-in-alt mr-1"></i> Login
-                        </a>
-                    </li>
-                <?php endif; ?>
-            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
+                                <i class="fas fa-user-circle mr-1"></i> <?= htmlspecialchars($_SESSION['nama']) ?>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <?php if (isAdmin()): ?>
+                                    <a class="dropdown-item" href="<?= $base_url ?>/admin/index.php"
+                                        style="color: var(--primary); font-weight: 600;">
+                                        <i class="fas fa-tachometer-alt mr-2"></i> Panel Admin
+                                    </a>
+                                    <div class="dropdown-divider"></div>
+                                <?php else: ?>
+                                    <a class="dropdown-item" href="<?= $base_url ?>/frontend/pesanan.php">
+                                        <i class="fas fa-receipt mr-2"></i> Pesanan Saya
+                                    </a>
+                                    <div class="dropdown-divider"></div>
+                                <?php endif; ?>
+                                <a class="dropdown-item" href="<?= $base_url ?>/frontend/proses/proses_logout.php">
+                                    <i class="fas fa-sign-out-alt mr-2"></i> Logout
+                                </a>
+                            </div>
+                        </li>
+                    <?php else: ?>
+                        <li class="nav-item ml-lg-2">
+                            <a class="nav-link btn-nav-login" href="<?= $base_url ?>/frontend/login.php">
+                                <i class="fas fa-sign-in-alt mr-1"></i> Login
+                            </a>
+                        </li>
+                    <?php endif; ?>
+                </ul>
+            </div>
         </div>
+    </nav>
+
+    <!-- Floating Pop-up Notifications Container (Overlay - Tidak Merusak Layout UI) -->
+    <div class="cipamilk-popup-container" id="cipamilkPopupContainer">
+        <?php if (isset($_SESSION['success'])): ?>
+            <div class="cipamilk-popup popup-success" role="alert">
+                <div class="popup-icon"><i class="fas fa-check-circle"></i></div>
+                <div class="popup-content">
+                    <div class="popup-title">Berhasil!</div>
+                    <div class="popup-msg"><?= htmlspecialchars($_SESSION['success']); ?></div>
+                </div>
+                <button type="button" class="popup-close-btn" onclick="closeCipamilkPopup(this)">&times;</button>
+            </div>
+            <?php unset($_SESSION['success']); ?>
+        <?php endif; ?>
+
+        <?php if (isset($_SESSION['error'])): ?>
+            <div class="cipamilk-popup popup-danger" role="alert">
+                <div class="popup-icon"><i class="fas fa-exclamation-circle"></i></div>
+                <div class="popup-content">
+                    <div class="popup-title">Pemberitahuan</div>
+                    <div class="popup-msg"><?= htmlspecialchars($_SESSION['error']); ?></div>
+                </div>
+                <button type="button" class="popup-close-btn" onclick="closeCipamilkPopup(this)">&times;</button>
+            </div>
+            <?php unset($_SESSION['error']); ?>
+        <?php endif; ?>
     </div>
-</nav>
-
-<!-- Floating Pop-up Notifications Container (Overlay - Tidak Merusak Layout UI) -->
-<div class="cipamilk-popup-container" id="cipamilkPopupContainer">
-    <?php if (isset($_SESSION['success'])): ?>
-        <div class="cipamilk-popup popup-success" role="alert">
-            <div class="popup-icon"><i class="fas fa-check-circle"></i></div>
-            <div class="popup-content">
-                <div class="popup-title">Berhasil!</div>
-                <div class="popup-msg"><?= htmlspecialchars($_SESSION['success']); ?></div>
-            </div>
-            <button type="button" class="popup-close-btn" onclick="closeCipamilkPopup(this)">&times;</button>
-        </div>
-        <?php unset($_SESSION['success']); ?>
-    <?php endif; ?>
-
-    <?php if (isset($_SESSION['error'])): ?>
-        <div class="cipamilk-popup popup-danger" role="alert">
-            <div class="popup-icon"><i class="fas fa-exclamation-circle"></i></div>
-            <div class="popup-content">
-                <div class="popup-title">Pemberitahuan</div>
-                <div class="popup-msg"><?= htmlspecialchars($_SESSION['error']); ?></div>
-            </div>
-            <button type="button" class="popup-close-btn" onclick="closeCipamilkPopup(this)">&times;</button>
-        </div>
-        <?php unset($_SESSION['error']); ?>
-    <?php endif; ?>
-</div>
-

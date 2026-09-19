@@ -4,9 +4,9 @@
  */
 require_once __DIR__ . '/../../config/database.php';
 
-$is_ajax = (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest') 
-        || (isset($_POST['ajax']) && $_POST['ajax'] == '1')
-        || (isset($_SERVER['HTTP_ACCEPT']) && strpos($_SERVER['HTTP_ACCEPT'], 'application/json') !== false);
+$is_ajax = (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest')
+    || (isset($_POST['ajax']) && $_POST['ajax'] == '1')
+    || (isset($_SERVER['HTTP_ACCEPT']) && strpos($_SERVER['HTTP_ACCEPT'], 'application/json') !== false);
 
 if (!isLoggedIn() || $_SESSION['role'] !== 'customer') {
     if ($is_ajax) {
@@ -27,8 +27,8 @@ $action = $_POST['action'] ?? $_GET['action'] ?? '';
 
 switch ($action) {
     case 'add':
-        $id_product = (int)($_POST['id_product'] ?? 0);
-        $jumlah     = (int)($_POST['jumlah'] ?? 1);
+        $id_product = (int) ($_POST['id_product'] ?? 0);
+        $jumlah = (int) ($_POST['jumlah'] ?? 1);
 
         if ($id_product <= 0 || $jumlah <= 0) {
             if ($is_ajax) {
@@ -81,7 +81,7 @@ switch ($action) {
         // Hitung total item baru di cart
         $stmt_count = $pdo->prepare("SELECT SUM(jumlah) as total FROM cart WHERE id_customer = ?");
         $stmt_count->execute([$id_customer]);
-        $cart_count = (int)($stmt_count->fetch()['total'] ?? 0);
+        $cart_count = (int) ($stmt_count->fetch()['total'] ?? 0);
 
         if ($is_ajax) {
             header('Content-Type: application/json');
@@ -100,8 +100,8 @@ switch ($action) {
         break;
 
     case 'update':
-        $id_cart = (int)($_POST['id_cart'] ?? 0);
-        $jumlah  = (int)($_POST['jumlah'] ?? 1);
+        $id_cart = (int) ($_POST['id_cart'] ?? 0);
+        $jumlah = (int) ($_POST['jumlah'] ?? 1);
 
         if ($jumlah <= 0) {
             // Hapus jika jumlah 0
@@ -116,7 +116,7 @@ switch ($action) {
         break;
 
     case 'delete':
-        $id_cart = (int)($_GET['id_cart'] ?? 0);
+        $id_cart = (int) ($_GET['id_cart'] ?? 0);
         $stmt = $pdo->prepare("DELETE FROM cart WHERE id_cart = ? AND id_customer = ?");
         $stmt->execute([$id_cart, $id_customer]);
 

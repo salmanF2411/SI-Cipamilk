@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     redirect($base_url . '/frontend/login.php');
 }
 
-$email    = sanitize($_POST['email'] ?? '');
+$email = sanitize($_POST['email'] ?? '');
 $password = $_POST['password'] ?? '';
 
 if (empty($email) || empty($password)) {
@@ -28,9 +28,9 @@ if (!$user || !password_verify($password, $user['password'])) {
 
 // Set session
 $_SESSION['id_user'] = $user['id_user'];
-$_SESSION['nama']    = $user['nama'];
-$_SESSION['email']   = $user['email'];
-$_SESSION['role']    = $user['role'];
+$_SESSION['nama'] = $user['nama'];
+$_SESSION['email'] = $user['email'];
+$_SESSION['role'] = $user['role'];
 
 // Jika customer, ambil id_customer
 if ($user['role'] === 'customer') {

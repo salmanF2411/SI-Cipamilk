@@ -23,7 +23,7 @@ if (isLoggedIn() && $_SESSION['role'] === 'customer') {
 }
 
 // Pre-select produk dari query param
-$selected_product = isset($_GET['produk']) ? (int)$_GET['produk'] : 0;
+$selected_product = isset($_GET['produk']) ? (int) $_GET['produk'] : 0;
 
 require_once __DIR__ . '/../includes/header.php';
 ?>
@@ -58,9 +58,12 @@ require_once __DIR__ . '/../includes/header.php';
                     <p class="subscription-card-period">Pengiriman setiap hari</p>
                     <p class="text-muted mb-3">Dapatkan susu segar setiap pagi langsung ke rumah Anda</p>
                     <ul class="list-unstyled text-left mb-3" style="font-size: 0.9rem;">
-                        <li class="mb-2"><i class="fas fa-check-circle mr-2" style="color: var(--green);"></i> Pengiriman setiap hari</li>
-                        <li class="mb-2"><i class="fas fa-check-circle mr-2" style="color: var(--green);"></i> Produk segar terjamin</li>
-                        <li class="mb-2"><i class="fas fa-check-circle mr-2" style="color: var(--green);"></i> Bisa berhenti kapan saja</li>
+                        <li class="mb-2"><i class="fas fa-check-circle mr-2" style="color: var(--green);"></i>
+                            Pengiriman setiap hari</li>
+                        <li class="mb-2"><i class="fas fa-check-circle mr-2" style="color: var(--green);"></i> Produk
+                            segar terjamin</li>
+                        <li class="mb-2"><i class="fas fa-check-circle mr-2" style="color: var(--green);"></i> Bisa
+                            berhenti kapan saja</li>
                     </ul>
                 </div>
             </div>
@@ -68,16 +71,20 @@ require_once __DIR__ . '/../includes/header.php';
             <!-- Mingguan -->
             <div class="col-lg-4 col-md-6 mb-4 reveal-on-scroll" style="transition-delay: 0.1s">
                 <div class="subscription-card featured">
-                    <div class="subscription-card-icon" style="background: linear-gradient(135deg, var(--accent), var(--accent-dark));">
+                    <div class="subscription-card-icon"
+                        style="background: linear-gradient(135deg, var(--accent), var(--accent-dark));">
                         <i class="fas fa-calendar-week"></i>
                     </div>
                     <h4 class="subscription-card-title">Mingguan</h4>
                     <p class="subscription-card-period">Pengiriman setiap minggu</p>
                     <p class="text-muted mb-3">Paket paling populer! Pengiriman rutin setiap minggu</p>
                     <ul class="list-unstyled text-left mb-3" style="font-size: 0.9rem;">
-                        <li class="mb-2"><i class="fas fa-check-circle mr-2" style="color: var(--green);"></i> Pengiriman tiap minggu</li>
-                        <li class="mb-2"><i class="fas fa-check-circle mr-2" style="color: var(--green);"></i> Paling diminati pelanggan</li>
-                        <li class="mb-2"><i class="fas fa-check-circle mr-2" style="color: var(--green);"></i> Bisa berhenti kapan saja</li>
+                        <li class="mb-2"><i class="fas fa-check-circle mr-2" style="color: var(--green);"></i>
+                            Pengiriman tiap minggu</li>
+                        <li class="mb-2"><i class="fas fa-check-circle mr-2" style="color: var(--green);"></i> Paling
+                            diminati pelanggan</li>
+                        <li class="mb-2"><i class="fas fa-check-circle mr-2" style="color: var(--green);"></i> Bisa
+                            berhenti kapan saja</li>
                     </ul>
                 </div>
             </div>
@@ -85,16 +92,20 @@ require_once __DIR__ . '/../includes/header.php';
             <!-- Bulanan -->
             <div class="col-lg-4 col-md-6 mb-4 reveal-on-scroll" style="transition-delay: 0.2s">
                 <div class="subscription-card">
-                    <div class="subscription-card-icon" style="background: linear-gradient(135deg, var(--green), var(--green-light));">
+                    <div class="subscription-card-icon"
+                        style="background: linear-gradient(135deg, var(--green), var(--green-light));">
                         <i class="fas fa-calendar-alt"></i>
                     </div>
                     <h4 class="subscription-card-title">Bulanan</h4>
                     <p class="subscription-card-period">Pengiriman setiap bulan</p>
                     <p class="text-muted mb-3">Cocok untuk kebutuhan bulanan keluarga Anda</p>
                     <ul class="list-unstyled text-left mb-3" style="font-size: 0.9rem;">
-                        <li class="mb-2"><i class="fas fa-check-circle mr-2" style="color: var(--green);"></i> Pengiriman tiap bulan</li>
-                        <li class="mb-2"><i class="fas fa-check-circle mr-2" style="color: var(--green);"></i> Hemat biaya pengiriman</li>
-                        <li class="mb-2"><i class="fas fa-check-circle mr-2" style="color: var(--green);"></i> Bisa berhenti kapan saja</li>
+                        <li class="mb-2"><i class="fas fa-check-circle mr-2" style="color: var(--green);"></i>
+                            Pengiriman tiap bulan</li>
+                        <li class="mb-2"><i class="fas fa-check-circle mr-2" style="color: var(--green);"></i> Hemat
+                            biaya pengiriman</li>
+                        <li class="mb-2"><i class="fas fa-check-circle mr-2" style="color: var(--green);"></i> Bisa
+                            berhenti kapan saja</li>
                     </ul>
                 </div>
             </div>
@@ -123,12 +134,14 @@ require_once __DIR__ . '/../includes/header.php';
                             border: 2px solid var(--border) !important;
                             border-radius: var(--radius-sm) !important;
                         }
+
                         .checkout-form-card select.form-control-cipamilk:focus,
                         .checkout-form-card input.form-control-cipamilk:focus {
                             border-color: var(--primary) !important;
                             background-color: #FFFFFF !important;
-                            box-shadow: 0 0 0 3px rgba(77,168,218,0.15) !important;
+                            box-shadow: 0 0 0 3px rgba(77, 168, 218, 0.15) !important;
                         }
+
                         .checkout-form-card select.form-control-cipamilk option {
                             padding: 10px 14px;
                             font-size: 0.95rem;
@@ -140,18 +153,19 @@ require_once __DIR__ . '/../includes/header.php';
                     <?php if (!isLoggedIn()): ?>
                         <div class="alert-cipamilk alert-warning-cipamilk">
                             <i class="fas fa-exclamation-triangle"></i>
-                            Silakan <a href="<?= $base_url ?>/frontend/login.php" style="font-weight: 700;">login</a> terlebih dahulu untuk membuat subscription.
+                            Silakan <a href="<?= $base_url ?>/frontend/login.php" style="font-weight: 700;">login</a>
+                            terlebih dahulu untuk membuat subscription.
                         </div>
                     <?php else: ?>
                         <form action="<?= $base_url ?>/frontend/proses/proses_subscription.php" method="POST">
                             <input type="hidden" name="action" value="create">
-                            
+
                             <div class="form-group">
                                 <label class="form-label-cipamilk font-weight-bold">Pilih Produk</label>
                                 <select name="id_product" class="form-control form-control-cipamilk" required>
                                     <option value="">-- Pilih Produk yang Ingin Dilanggan --</option>
                                     <?php foreach ($products as $p): ?>
-                                        <option value="<?= $p['id_product'] ?>" <?= $selected_product === (int)$p['id_product'] ? 'selected' : '' ?>>
+                                        <option value="<?= $p['id_product'] ?>" <?= $selected_product === (int) $p['id_product'] ? 'selected' : '' ?>>
                                             <?= htmlspecialchars($p['nama_produk']) ?> — <?= formatRupiah($p['harga']) ?>
                                         </option>
                                     <?php endforeach; ?>
@@ -172,12 +186,14 @@ require_once __DIR__ . '/../includes/header.php';
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="form-label-cipamilk font-weight-bold">Tanggal Mulai</label>
-                                        <input type="date" name="tanggal_mulai" class="form-control form-control-cipamilk" required min="<?= date('Y-m-d') ?>" value="<?= date('Y-m-d') ?>">
+                                        <input type="date" name="tanggal_mulai" class="form-control form-control-cipamilk"
+                                            required min="<?= date('Y-m-d') ?>" value="<?= date('Y-m-d') ?>">
                                     </div>
                                 </div>
                             </div>
 
-                            <button type="submit" class="btn btn-accent-cipamilk btn-block py-2 font-weight-bold" style="font-size: 1rem; border-radius: var(--radius-sm);">
+                            <button type="submit" class="btn btn-accent-cipamilk btn-block py-2 font-weight-bold"
+                                style="font-size: 1rem; border-radius: var(--radius-sm);">
                                 <i class="fas fa-calendar-check mr-2"></i> Mulai Langganan
                             </button>
                         </form>
@@ -190,53 +206,56 @@ require_once __DIR__ . '/../includes/header.php';
 
 <!-- My Subscriptions -->
 <?php if (isLoggedIn() && count($my_subscriptions) > 0): ?>
-<section class="section-padding section-cream">
-    <div class="container">
-        <h3 class="section-title">Langganan <span>Saya</span></h3>
-        <p class="section-subtitle">Kelola subscription aktif Anda</p>
+    <section class="section-padding section-cream">
+        <div class="container">
+            <h3 class="section-title">Langganan <span>Saya</span></h3>
+            <p class="section-subtitle">Kelola subscription aktif Anda</p>
 
-        <div class="row justify-content-center">
-            <?php foreach ($my_subscriptions as $sub): ?>
-            <div class="col-lg-6 mb-4">
-                <div class="checkout-form-card">
-                    <div class="d-flex justify-content-between align-items-start mb-3">
-                        <div>
-                            <h5 style="font-family: var(--font-heading); font-weight: 700; margin: 0;">
-                                <?= htmlspecialchars($sub['nama_produk']) ?>
-                            </h5>
-                            <small class="text-muted">ID: #SUB-<?= str_pad($sub['id_subscription'], 4, '0', STR_PAD_LEFT) ?></small>
+            <div class="row justify-content-center">
+                <?php foreach ($my_subscriptions as $sub): ?>
+                    <div class="col-lg-6 mb-4">
+                        <div class="checkout-form-card">
+                            <div class="d-flex justify-content-between align-items-start mb-3">
+                                <div>
+                                    <h5 style="font-family: var(--font-heading); font-weight: 700; margin: 0;">
+                                        <?= htmlspecialchars($sub['nama_produk']) ?>
+                                    </h5>
+                                    <small class="text-muted">ID:
+                                        #SUB-<?= str_pad($sub['id_subscription'], 4, '0', STR_PAD_LEFT) ?></small>
+                                </div>
+                                <span class="badge-status badge-<?= $sub['status'] ?>">
+                                    <?= ucfirst($sub['status']) ?>
+                                </span>
+                            </div>
+
+                            <div class="d-flex justify-content-between mb-2">
+                                <span class="text-muted"><i class="fas fa-sync-alt mr-1"></i> Periode</span>
+                                <span style="font-weight: 600;"><?= ucfirst($sub['periode']) ?></span>
+                            </div>
+                            <div class="d-flex justify-content-between mb-2">
+                                <span class="text-muted"><i class="fas fa-calendar mr-1"></i> Tanggal Mulai</span>
+                                <span style="font-weight: 600;"><?= date('d M Y', strtotime($sub['tanggal_mulai'])) ?></span>
+                            </div>
+                            <div class="d-flex justify-content-between mb-3">
+                                <span class="text-muted"><i class="fas fa-tag mr-1"></i> Harga</span>
+                                <span
+                                    style="font-weight: 600; color: var(--primary);"><?= formatRupiah($sub['harga']) ?>/<?= $sub['periode'] === 'harian' ? 'hari' : ($sub['periode'] === 'mingguan' ? 'minggu' : 'bulan') ?></span>
+                            </div>
+
+                            <?php if ($sub['status'] === 'aktif'): ?>
+                                <a href="<?= $base_url ?>/frontend/proses/proses_subscription.php?action=cancel&id=<?= $sub['id_subscription'] ?>"
+                                    class="btn btn-sm"
+                                    style="color: var(--danger); border: 1px solid var(--danger); border-radius: var(--radius-sm);"
+                                    onclick="return confirm('Yakin ingin membatalkan langganan ini?')">
+                                    <i class="fas fa-times mr-1"></i> Batalkan
+                                </a>
+                            <?php endif; ?>
                         </div>
-                        <span class="badge-status badge-<?= $sub['status'] ?>">
-                            <?= ucfirst($sub['status']) ?>
-                        </span>
                     </div>
-
-                    <div class="d-flex justify-content-between mb-2">
-                        <span class="text-muted"><i class="fas fa-sync-alt mr-1"></i> Periode</span>
-                        <span style="font-weight: 600;"><?= ucfirst($sub['periode']) ?></span>
-                    </div>
-                    <div class="d-flex justify-content-between mb-2">
-                        <span class="text-muted"><i class="fas fa-calendar mr-1"></i> Tanggal Mulai</span>
-                        <span style="font-weight: 600;"><?= date('d M Y', strtotime($sub['tanggal_mulai'])) ?></span>
-                    </div>
-                    <div class="d-flex justify-content-between mb-3">
-                        <span class="text-muted"><i class="fas fa-tag mr-1"></i> Harga</span>
-                        <span style="font-weight: 600; color: var(--primary);"><?= formatRupiah($sub['harga']) ?>/<?= $sub['periode'] === 'harian' ? 'hari' : ($sub['periode'] === 'mingguan' ? 'minggu' : 'bulan') ?></span>
-                    </div>
-
-                    <?php if ($sub['status'] === 'aktif'): ?>
-                        <a href="<?= $base_url ?>/frontend/proses/proses_subscription.php?action=cancel&id=<?= $sub['id_subscription'] ?>" 
-                           class="btn btn-sm" style="color: var(--danger); border: 1px solid var(--danger); border-radius: var(--radius-sm);"
-                           onclick="return confirm('Yakin ingin membatalkan langganan ini?')">
-                            <i class="fas fa-times mr-1"></i> Batalkan
-                        </a>
-                    <?php endif; ?>
-                </div>
+                <?php endforeach; ?>
             </div>
-            <?php endforeach; ?>
         </div>
-    </div>
-</section>
+    </section>
 <?php endif; ?>
 
 <?php require_once __DIR__ . '/../includes/footer.php'; ?>

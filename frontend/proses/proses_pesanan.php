@@ -13,7 +13,7 @@ $id_customer = $_SESSION['id_customer'];
 $action = $_POST['action'] ?? $_GET['action'] ?? '';
 
 if ($action === 'complete') {
-    $id = (int)($_POST['id_order'] ?? $_GET['id'] ?? 0);
+    $id = (int) ($_POST['id_order'] ?? $_GET['id'] ?? 0);
 
     // Ambil pesanan dan pastikan milik customer ini
     $stmt = $pdo->prepare("SELECT * FROM orders WHERE id_order = ? AND id_customer = ?");

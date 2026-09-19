@@ -1,9 +1,10 @@
-    </div><!-- /.content-wrapper -->
+</div><!-- /.content-wrapper -->
 
-    <!-- Footer -->
-    <footer class="main-footer text-center">
-        <strong>&copy; <?= date('Y') ?> <a href="<?= $base_url ?>/frontend/index.php">Cipamilk</a>.</strong> All rights reserved.
-    </footer>
+<!-- Footer -->
+<footer class="main-footer text-center">
+    <strong>&copy; <?= date('Y') ?> <a href="<?= $base_url ?>/frontend/index.php">Cipamilk</a>.</strong> All rights
+    reserved.
+</footer>
 </div><!-- ./wrapper -->
 
 <!-- jQuery -->
@@ -13,4 +14,5 @@
 <!-- AdminLTE -->
 <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2.0/dist/js/adminlte.min.js"></script>
 </body>
+
 </html>

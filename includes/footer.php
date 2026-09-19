@@ -22,9 +22,12 @@
                 <h5>Menu</h5>
                 <ul class="footer-links">
                     <li><a href="<?= $base_url ?>/frontend/index.php"><i class="fas fa-chevron-right"></i> Home</a></li>
-                    <li><a href="<?= $base_url ?>/frontend/produk.php"><i class="fas fa-chevron-right"></i> Produk</a></li>
-                    <li><a href="<?= $base_url ?>/frontend/subscription.php"><i class="fas fa-chevron-right"></i> Subscription</a></li>
-                    <li><a href="<?= $base_url ?>/frontend/login.php"><i class="fas fa-chevron-right"></i> Login</a></li>
+                    <li><a href="<?= $base_url ?>/frontend/produk.php"><i class="fas fa-chevron-right"></i> Produk</a>
+                    </li>
+                    <li><a href="<?= $base_url ?>/frontend/subscription.php"><i class="fas fa-chevron-right"></i>
+                            Subscription</a></li>
+                    <li><a href="<?= $base_url ?>/frontend/login.php"><i class="fas fa-chevron-right"></i> Login</a>
+                    </li>
                 </ul>
             </div>
 
@@ -32,10 +35,14 @@
             <div class="col-lg-3 col-md-6 mb-4">
                 <h5>Kategori</h5>
                 <ul class="footer-links">
-                    <li><a href="<?= $base_url ?>/frontend/produk.php?kategori=1"><i class="fas fa-chevron-right"></i> Susu Segar</a></li>
-                    <li><a href="<?= $base_url ?>/frontend/produk.php?kategori=2"><i class="fas fa-chevron-right"></i> Yogurt</a></li>
-                    <li><a href="<?= $base_url ?>/frontend/produk.php?kategori=3"><i class="fas fa-chevron-right"></i> Keju</a></li>
-                    <li><a href="<?= $base_url ?>/frontend/produk.php?kategori=4"><i class="fas fa-chevron-right"></i> Es Krim</a></li>
+                    <li><a href="<?= $base_url ?>/frontend/produk.php?kategori=1"><i class="fas fa-chevron-right"></i>
+                            Susu Segar</a></li>
+                    <li><a href="<?= $base_url ?>/frontend/produk.php?kategori=2"><i class="fas fa-chevron-right"></i>
+                            Yogurt</a></li>
+                    <li><a href="<?= $base_url ?>/frontend/produk.php?kategori=3"><i class="fas fa-chevron-right"></i>
+                            Keju</a></li>
+                    <li><a href="<?= $base_url ?>/frontend/produk.php?kategori=4"><i class="fas fa-chevron-right"></i>
+                            Es Krim</a></li>
                 </ul>
             </div>
 
@@ -65,7 +72,8 @@
 
         <!-- Bottom -->
         <div class="footer-bottom">
-            <p class="mb-0">&copy; <?= date('Y') ?> <strong>Cipamilk</strong>. All rights reserved. | Olahan Susu Segar Berkualitas</p>
+            <p class="mb-0">&copy; <?= date('Y') ?> <strong>Cipamilk</strong>. All rights reserved. | Olahan Susu Segar
+                Berkualitas</p>
         </div>
     </div>
 </footer>
@@ -80,4 +88,5 @@
 <script src="<?= $base_url ?>/assets/js/script.js"></script>
 
 </body>
+
 </html>

@@ -9,9 +9,9 @@ require_once __DIR__ . '/includes/sidebar.php';
 
 // Statistik penjualan
 $total_pendapatan = $pdo->query("SELECT COALESCE(SUM(total), 0) FROM orders WHERE status != 'dibatalkan'")->fetchColumn();
-$total_pesanan    = $pdo->query("SELECT COUNT(*) FROM orders")->fetchColumn();
-$pesanan_selesai  = $pdo->query("SELECT COUNT(*) FROM orders WHERE status = 'selesai'")->fetchColumn();
-$pesanan_batal    = $pdo->query("SELECT COUNT(*) FROM orders WHERE status = 'dibatalkan'")->fetchColumn();
+$total_pesanan = $pdo->query("SELECT COUNT(*) FROM orders")->fetchColumn();
+$pesanan_selesai = $pdo->query("SELECT COUNT(*) FROM orders WHERE status = 'selesai'")->fetchColumn();
+$pesanan_batal = $pdo->query("SELECT COUNT(*) FROM orders WHERE status = 'dibatalkan'")->fetchColumn();
 
 // Produk terlaris
 $top_products = $pdo->query("
@@ -104,8 +104,10 @@ $sub_periods = $pdo->query("
                 <!-- Produk Terlaris -->
                 <div class="col-lg-6">
                     <div class="card">
-                        <div class="card-header" style="background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: #fff;">
-                            <h3 class="card-title" style="font-weight: 700;"><i class="fas fa-trophy mr-2"></i> Produk Terlaris</h3>
+                        <div class="card-header"
+                            style="background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: #fff;">
+                            <h3 class="card-title" style="font-weight: 700;"><i class="fas fa-trophy mr-2"></i> Produk
+                                Terlaris</h3>
                         </div>
                         <div class="card-body p-0">
                             <table class="table table-hover mb-0">
@@ -119,25 +121,31 @@ $sub_periods = $pdo->query("
                                 </thead>
                                 <tbody>
                                     <?php foreach ($top_products as $i => $tp): ?>
-                                    <tr>
-                                        <td>
-                                            <?php if ($i === 0): ?>
-                                                <i class="fas fa-medal" style="color: gold; font-size: 1.2rem;"></i>
-                                            <?php elseif ($i === 1): ?>
-                                                <i class="fas fa-medal" style="color: silver; font-size: 1.2rem;"></i>
-                                            <?php elseif ($i === 2): ?>
-                                                <i class="fas fa-medal" style="color: #cd7f32; font-size: 1.2rem;"></i>
-                                            <?php else: ?>
-                                                <?= $i + 1 ?>
-                                            <?php endif; ?>
-                                        </td>
-                                        <td><strong><?= htmlspecialchars($tp['nama_produk']) ?></strong></td>
-                                        <td><span class="badge badge-info" style="border-radius: 20px; padding: 0.3rem 0.6rem;"><?= $tp['total_terjual'] ?></span></td>
-                                        <td><strong style="color: var(--green);"><?= formatRupiah($tp['total_penjualan']) ?></strong></td>
-                                    </tr>
+                                        <tr>
+                                            <td>
+                                                <?php if ($i === 0): ?>
+                                                    <i class="fas fa-medal" style="color: gold; font-size: 1.2rem;"></i>
+                                                <?php elseif ($i === 1): ?>
+                                                    <i class="fas fa-medal" style="color: silver; font-size: 1.2rem;"></i>
+                                                <?php elseif ($i === 2): ?>
+                                                    <i class="fas fa-medal" style="color: #cd7f32; font-size: 1.2rem;"></i>
+                                                <?php else: ?>
+                                                    <?= $i + 1 ?>
+                                                <?php endif; ?>
+                                            </td>
+                                            <td><strong><?= htmlspecialchars($tp['nama_produk']) ?></strong></td>
+                                            <td><span class="badge badge-info"
+                                                    style="border-radius: 20px; padding: 0.3rem 0.6rem;"><?= $tp['total_terjual'] ?></span>
+                                            </td>
+                                            <td><strong
+                                                    style="color: var(--green);"><?= formatRupiah($tp['total_penjualan']) ?></strong>
+                                            </td>
+                                        </tr>
                                     <?php endforeach; ?>
                                     <?php if (empty($top_products)): ?>
-                                    <tr><td colspan="4" class="text-center text-muted py-4">Belum ada data</td></tr>
+                                        <tr>
+                                            <td colspan="4" class="text-center text-muted py-4">Belum ada data</td>
+                                        </tr>
                                     <?php endif; ?>
                                 </tbody>
                             </table>
@@ -148,19 +156,22 @@ $sub_periods = $pdo->query("
                 <!-- Status Pesanan & Subscription -->
                 <div class="col-lg-6">
                     <div class="card">
-                        <div class="card-header" style="background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: #fff;">
-                            <h3 class="card-title" style="font-weight: 700;"><i class="fas fa-chart-pie mr-2"></i> Status Pesanan</h3>
+                        <div class="card-header"
+                            style="background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: #fff;">
+                            <h3 class="card-title" style="font-weight: 700;"><i class="fas fa-chart-pie mr-2"></i>
+                                Status Pesanan</h3>
                         </div>
                         <div class="card-body">
                             <?php foreach ($status_counts as $sc): ?>
-                            <div class="d-flex justify-content-between align-items-center mb-3">
-                                <span>
-                                    <span class="badge badge-<?= $sc['status'] ?>" style="padding: 0.3rem 0.6rem; border-radius: 20px; font-size: 0.8rem; min-width: 90px; display: inline-block; text-align: center;">
-                                        <?= ucfirst($sc['status']) ?>
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <span>
+                                        <span class="badge badge-<?= $sc['status'] ?>"
+                                            style="padding: 0.3rem 0.6rem; border-radius: 20px; font-size: 0.8rem; min-width: 90px; display: inline-block; text-align: center;">
+                                            <?= ucfirst($sc['status']) ?>
+                                        </span>
                                     </span>
-                                </span>
-                                <strong><?= $sc['jumlah'] ?> pesanan</strong>
-                            </div>
+                                    <strong><?= $sc['jumlah'] ?> pesanan</strong>
+                                </div>
                             <?php endforeach; ?>
                             <?php if (empty($status_counts)): ?>
                                 <p class="text-muted text-center">Belum ada data</p>
@@ -169,15 +180,17 @@ $sub_periods = $pdo->query("
                     </div>
 
                     <div class="card">
-                        <div class="card-header" style="background: linear-gradient(135deg, var(--accent), var(--accent-dark)); color: #333;">
-                            <h3 class="card-title" style="font-weight: 700;"><i class="fas fa-calendar-check mr-2"></i> Subscription Aktif per Periode</h3>
+                        <div class="card-header"
+                            style="background: linear-gradient(135deg, var(--accent), var(--accent-dark)); color: #333;">
+                            <h3 class="card-title" style="font-weight: 700;"><i class="fas fa-calendar-check mr-2"></i>
+                                Subscription Aktif per Periode</h3>
                         </div>
                         <div class="card-body">
                             <?php foreach ($sub_periods as $sp): ?>
-                            <div class="d-flex justify-content-between align-items-center mb-3">
-                                <span style="font-weight: 600;"><?= ucfirst($sp['periode']) ?></span>
-                                <strong><?= $sp['jumlah'] ?> subscriber</strong>
-                            </div>
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <span style="font-weight: 600;"><?= ucfirst($sp['periode']) ?></span>
+                                    <strong><?= $sp['jumlah'] ?> subscriber</strong>
+                                </div>
                             <?php endforeach; ?>
                             <?php if (empty($sub_periods)): ?>
                                 <p class="text-muted text-center">Belum ada subscription aktif</p>

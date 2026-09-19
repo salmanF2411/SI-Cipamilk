@@ -4,7 +4,7 @@
  */
 require_once __DIR__ . '/../config/database.php';
 
-$id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
+$id = isset($_GET['id']) ? (int) $_GET['id'] : 0;
 
 // Ambil data produk
 $stmt = $pdo->prepare("SELECT p.*, c.nama_kategori FROM products p JOIN categories c ON p.id_category = c.id_category WHERE p.id_product = ?");
@@ -46,7 +46,8 @@ require_once __DIR__ . '/../includes/header.php';
             <!-- Product Image -->
             <div class="col-lg-5 mb-4">
                 <div class="detail-image-wrapper">
-                    <img src="<?= $base_url ?>/assets/images/products/<?= htmlspecialchars($product['gambar']) ?>" alt="<?= htmlspecialchars($product['nama_produk']) ?>">
+                    <img src="<?= $base_url ?>/assets/images/products/<?= htmlspecialchars($product['gambar']) ?>"
+                        alt="<?= htmlspecialchars($product['nama_produk']) ?>">
                 </div>
             </div>
 
@@ -67,18 +68,22 @@ require_once __DIR__ . '/../includes/header.php';
                     </div>
 
                     <?php if ($product['stok'] > 0): ?>
-                        <form action="<?= $base_url ?>/frontend/proses/proses_keranjang.php" method="POST" id="form-add-to-cart">
+                        <form action="<?= $base_url ?>/frontend/proses/proses_keranjang.php" method="POST"
+                            id="form-add-to-cart">
                             <input type="hidden" name="action" value="add">
                             <input type="hidden" name="id_product" value="<?= $product['id_product'] ?>">
-                            
+
                             <div class="detail-qty">
                                 <label>Jumlah:</label>
                                 <div class="d-flex align-items-center">
-                                    <button type="button" class="btn btn-outline-cipamilk btn-sm qty-minus" style="padding: 0.3rem 0.8rem;">
+                                    <button type="button" class="btn btn-outline-cipamilk btn-sm qty-minus"
+                                        style="padding: 0.3rem 0.8rem;">
                                         <i class="fas fa-minus"></i>
                                     </button>
-                                    <input type="number" name="jumlah" value="1" min="1" max="<?= $product['stok'] ?>" class="qty-input mx-2">
-                                    <button type="button" class="btn btn-outline-cipamilk btn-sm qty-plus" style="padding: 0.3rem 0.8rem;">
+                                    <input type="number" name="jumlah" value="1" min="1" max="<?= $product['stok'] ?>"
+                                        class="qty-input mx-2">
+                                    <button type="button" class="btn btn-outline-cipamilk btn-sm qty-plus"
+                                        style="padding: 0.3rem 0.8rem;">
                                         <i class="fas fa-plus"></i>
                                     </button>
                                 </div>
@@ -88,7 +93,8 @@ require_once __DIR__ . '/../includes/header.php';
                                 <button type="submit" class="btn btn-primary-cipamilk" id="btn-add-to-cart">
                                     <i class="fas fa-cart-plus mr-2"></i> Tambah ke Keranjang
                                 </button>
-                                <a href="<?= $base_url ?>/frontend/subscription.php?produk=<?= $product['id_product'] ?>" class="btn btn-accent-cipamilk">
+                                <a href="<?= $base_url ?>/frontend/subscription.php?produk=<?= $product['id_product'] ?>"
+                                    class="btn btn-accent-cipamilk">
                                     <i class="fas fa-calendar-check mr-2"></i> Subscribe
                                 </a>
                             </div>
@@ -105,31 +111,35 @@ require_once __DIR__ . '/../includes/header.php';
 
         <!-- Related Products -->
         <?php if (count($related) > 0): ?>
-        <div class="mt-5">
-            <h3 class="section-title">Produk <span>Terkait</span></h3>
-            <p class="section-subtitle">Produk lain dari kategori <?= htmlspecialchars($product['nama_kategori']) ?></p>
-            <div class="row">
-                <?php foreach ($related as $r): ?>
-                <div class="col-lg-3 col-md-6 mb-4 reveal-on-scroll">
-                    <div class="product-card" data-href="<?= $base_url ?>/frontend/detail_produk.php?id=<?= $r['id_product'] ?>" onclick="if(!event.target.closest('a, button')) window.location.href='<?= $base_url ?>/frontend/detail_produk.php?id=<?= $r['id_product'] ?>'">
-                        <div class="product-card-image">
-                            <img src="<?= $base_url ?>/assets/images/products/<?= htmlspecialchars($r['gambar']) ?>" alt="<?= htmlspecialchars($r['nama_produk']) ?>">
-                        </div>
-                        <div class="product-card-body">
-                            <span class="product-card-category"><?= htmlspecialchars($r['nama_kategori']) ?></span>
-                            <h5 class="product-card-title"><?= htmlspecialchars($r['nama_produk']) ?></h5>
-                            <div class="product-card-footer">
-                                <span class="product-card-price"><?= formatRupiah($r['harga']) ?></span>
-                                <a href="<?= $base_url ?>/frontend/detail_produk.php?id=<?= $r['id_product'] ?>" class="btn btn-primary-cipamilk btn-sm">
-                                    <i class="fas fa-eye mr-1"></i> Detail
-                                </a>
+            <div class="mt-5">
+                <h3 class="section-title">Produk <span>Terkait</span></h3>
+                <p class="section-subtitle">Produk lain dari kategori <?= htmlspecialchars($product['nama_kategori']) ?></p>
+                <div class="row">
+                    <?php foreach ($related as $r): ?>
+                        <div class="col-lg-3 col-md-6 mb-4 reveal-on-scroll">
+                            <div class="product-card"
+                                data-href="<?= $base_url ?>/frontend/detail_produk.php?id=<?= $r['id_product'] ?>"
+                                onclick="if(!event.target.closest('a, button')) window.location.href='<?= $base_url ?>/frontend/detail_produk.php?id=<?= $r['id_product'] ?>'">
+                                <div class="product-card-image">
+                                    <img src="<?= $base_url ?>/assets/images/products/<?= htmlspecialchars($r['gambar']) ?>"
+                                        alt="<?= htmlspecialchars($r['nama_produk']) ?>">
+                                </div>
+                                <div class="product-card-body">
+                                    <span class="product-card-category"><?= htmlspecialchars($r['nama_kategori']) ?></span>
+                                    <h5 class="product-card-title"><?= htmlspecialchars($r['nama_produk']) ?></h5>
+                                    <div class="product-card-footer">
+                                        <span class="product-card-price"><?= formatRupiah($r['harga']) ?></span>
+                                        <a href="<?= $base_url ?>/frontend/detail_produk.php?id=<?= $r['id_product'] ?>"
+                                            class="btn btn-primary-cipamilk btn-sm">
+                                            <i class="fas fa-eye mr-1"></i> Detail
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    <?php endforeach; ?>
                 </div>
-                <?php endforeach; ?>
             </div>
-        </div>
         <?php endif; ?>
     </div>
 </section>

@@ -8,12 +8,12 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     redirect($base_url . '/frontend/register.php');
 }
 
-$nama              = sanitize($_POST['nama'] ?? '');
-$email             = sanitize($_POST['email'] ?? '');
-$password          = $_POST['password'] ?? '';
-$konfirmasi        = $_POST['konfirmasi_password'] ?? '';
-$nomor_telepon     = sanitize($_POST['nomor_telepon'] ?? '');
-$alamat            = sanitize($_POST['alamat'] ?? '');
+$nama = sanitize($_POST['nama'] ?? '');
+$email = sanitize($_POST['email'] ?? '');
+$password = $_POST['password'] ?? '';
+$konfirmasi = $_POST['konfirmasi_password'] ?? '';
+$nomor_telepon = sanitize($_POST['nomor_telepon'] ?? '');
+$alamat = sanitize($_POST['alamat'] ?? '');
 
 // Validasi
 if (empty($nama) || empty($email) || empty($password) || empty($nomor_telepon) || empty($alamat)) {

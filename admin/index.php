@@ -8,12 +8,12 @@ require_once __DIR__ . '/includes/header.php';
 require_once __DIR__ . '/includes/sidebar.php';
 
 // Statistik
-$total_produk      = $pdo->query("SELECT COUNT(*) FROM products")->fetchColumn();
-$total_customer    = $pdo->query("SELECT COUNT(*) FROM customers")->fetchColumn();
-$total_pesanan     = $pdo->query("SELECT COUNT(*) FROM orders")->fetchColumn();
+$total_produk = $pdo->query("SELECT COUNT(*) FROM products")->fetchColumn();
+$total_customer = $pdo->query("SELECT COUNT(*) FROM customers")->fetchColumn();
+$total_pesanan = $pdo->query("SELECT COUNT(*) FROM orders")->fetchColumn();
 $total_subscription = $pdo->query("SELECT COUNT(*) FROM subscriptions WHERE status = 'aktif'")->fetchColumn();
-$total_pendapatan  = $pdo->query("SELECT COALESCE(SUM(total), 0) FROM orders WHERE status != 'dibatalkan'")->fetchColumn();
-$pesanan_pending   = $pdo->query("SELECT COUNT(*) FROM orders WHERE status = 'pending'")->fetchColumn();
+$total_pendapatan = $pdo->query("SELECT COALESCE(SUM(total), 0) FROM orders WHERE status != 'dibatalkan'")->fetchColumn();
+$pesanan_pending = $pdo->query("SELECT COUNT(*) FROM orders WHERE status = 'pending'")->fetchColumn();
 
 // Pesanan terbaru
 $recent_orders = $pdo->query("
@@ -55,7 +55,8 @@ $recent_orders = $pdo->query("
                             <p>Total Produk</p>
                         </div>
                         <div class="icon"><i class="fas fa-box-open"></i></div>
-                        <a href="<?= $base_url ?>/admin/produk.php" class="small-box-footer" style="color: rgba(255,255,255,0.8);">
+                        <a href="<?= $base_url ?>/admin/produk.php" class="small-box-footer"
+                            style="color: rgba(255,255,255,0.8);">
                             Lihat Detail <i class="fas fa-arrow-circle-right"></i>
                         </a>
                     </div>
@@ -67,7 +68,8 @@ $recent_orders = $pdo->query("
                             <p>Pelanggan</p>
                         </div>
                         <div class="icon"><i class="fas fa-users"></i></div>
-                        <a href="<?= $base_url ?>/admin/customer.php" class="small-box-footer" style="color: rgba(255,255,255,0.8);">
+                        <a href="<?= $base_url ?>/admin/customer.php" class="small-box-footer"
+                            style="color: rgba(255,255,255,0.8);">
                             Lihat Detail <i class="fas fa-arrow-circle-right"></i>
                         </a>
                     </div>
@@ -79,7 +81,8 @@ $recent_orders = $pdo->query("
                             <p>Total Pesanan</p>
                         </div>
                         <div class="icon"><i class="fas fa-shopping-bag"></i></div>
-                        <a href="<?= $base_url ?>/admin/pesanan.php" class="small-box-footer" style="color: rgba(0,0,0,0.6);">
+                        <a href="<?= $base_url ?>/admin/pesanan.php" class="small-box-footer"
+                            style="color: rgba(0,0,0,0.6);">
                             Lihat Detail <i class="fas fa-arrow-circle-right"></i>
                         </a>
                     </div>
@@ -91,7 +94,8 @@ $recent_orders = $pdo->query("
                             <p>Subscription Aktif</p>
                         </div>
                         <div class="icon"><i class="fas fa-calendar-check"></i></div>
-                        <a href="<?= $base_url ?>/admin/subscription.php" class="small-box-footer" style="color: rgba(255,255,255,0.8);">
+                        <a href="<?= $base_url ?>/admin/subscription.php" class="small-box-footer"
+                            style="color: rgba(255,255,255,0.8);">
                             Lihat Detail <i class="fas fa-arrow-circle-right"></i>
                         </a>
                     </div>
@@ -102,21 +106,28 @@ $recent_orders = $pdo->query("
             <div class="row">
                 <div class="col-lg-6">
                     <div class="card">
-                        <div class="card-header" style="background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: #fff;">
-                            <h3 class="card-title" style="font-weight: 700;"><i class="fas fa-money-bill-wave mr-2"></i> Ringkasan</h3>
+                        <div class="card-header"
+                            style="background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: #fff;">
+                            <h3 class="card-title" style="font-weight: 700;"><i class="fas fa-money-bill-wave mr-2"></i>
+                                Ringkasan</h3>
                         </div>
                         <div class="card-body">
-                            <div class="d-flex justify-content-between align-items-center mb-3 pb-3" style="border-bottom: 1px solid #eee;">
+                            <div class="d-flex justify-content-between align-items-center mb-3 pb-3"
+                                style="border-bottom: 1px solid #eee;">
                                 <span><i class="fas fa-wallet mr-2 text-success"></i> Total Pendapatan</span>
-                                <strong style="font-size: 1.2rem; color: var(--green);"><?= formatRupiah($total_pendapatan) ?></strong>
+                                <strong
+                                    style="font-size: 1.2rem; color: var(--green);"><?= formatRupiah($total_pendapatan) ?></strong>
                             </div>
-                            <div class="d-flex justify-content-between align-items-center mb-3 pb-3" style="border-bottom: 1px solid #eee;">
+                            <div class="d-flex justify-content-between align-items-center mb-3 pb-3"
+                                style="border-bottom: 1px solid #eee;">
                                 <span><i class="fas fa-clock mr-2 text-warning"></i> Pesanan Pending</span>
-                                <span class="badge badge-warning" style="font-size: 0.9rem; padding: 0.4rem 0.8rem;"><?= $pesanan_pending ?></span>
+                                <span class="badge badge-warning"
+                                    style="font-size: 0.9rem; padding: 0.4rem 0.8rem;"><?= $pesanan_pending ?></span>
                             </div>
                             <div class="d-flex justify-content-between align-items-center">
                                 <span><i class="fas fa-calendar-check mr-2 text-info"></i> Subscription Aktif</span>
-                                <span class="badge badge-info" style="font-size: 0.9rem; padding: 0.4rem 0.8rem;"><?= $total_subscription ?></span>
+                                <span class="badge badge-info"
+                                    style="font-size: 0.9rem; padding: 0.4rem 0.8rem;"><?= $total_subscription ?></span>
                             </div>
                         </div>
                     </div>
@@ -124,8 +135,10 @@ $recent_orders = $pdo->query("
 
                 <div class="col-lg-6">
                     <div class="card">
-                        <div class="card-header" style="background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: #fff;">
-                            <h3 class="card-title" style="font-weight: 700;"><i class="fas fa-history mr-2"></i> Pesanan Terbaru</h3>
+                        <div class="card-header"
+                            style="background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: #fff;">
+                            <h3 class="card-title" style="font-weight: 700;"><i class="fas fa-history mr-2"></i> Pesanan
+                                Terbaru</h3>
                         </div>
                         <div class="card-body p-0">
                             <table class="table table-hover mb-0">
@@ -139,19 +152,23 @@ $recent_orders = $pdo->query("
                                 </thead>
                                 <tbody>
                                     <?php foreach ($recent_orders as $order): ?>
-                                    <tr>
-                                        <td><strong>#ORD-<?= str_pad($order['id_order'], 5, '0', STR_PAD_LEFT) ?></strong></td>
-                                        <td><?= htmlspecialchars($order['nama']) ?></td>
-                                        <td><?= formatRupiah($order['total']) ?></td>
-                                        <td>
-                                            <span class="badge badge-<?= $order['status'] ?>" style="padding: 0.3rem 0.6rem; border-radius: 20px; font-size: 0.75rem;">
-                                                <?= ucfirst($order['status']) ?>
-                                            </span>
-                                        </td>
-                                    </tr>
+                                        <tr>
+                                            <td><strong>#ORD-<?= str_pad($order['id_order'], 5, '0', STR_PAD_LEFT) ?></strong>
+                                            </td>
+                                            <td><?= htmlspecialchars($order['nama']) ?></td>
+                                            <td><?= formatRupiah($order['total']) ?></td>
+                                            <td>
+                                                <span class="badge badge-<?= $order['status'] ?>"
+                                                    style="padding: 0.3rem 0.6rem; border-radius: 20px; font-size: 0.75rem;">
+                                                    <?= ucfirst($order['status']) ?>
+                                                </span>
+                                            </td>
+                                        </tr>
                                     <?php endforeach; ?>
                                     <?php if (empty($recent_orders)): ?>
-                                    <tr><td colspan="4" class="text-center text-muted">Belum ada pesanan</td></tr>
+                                        <tr>
+                                            <td colspan="4" class="text-center text-muted">Belum ada pesanan</td>
+                                        </tr>
                                     <?php endif; ?>
                                 </tbody>
                             </table>

@@ -12,9 +12,15 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     redirect($base_url . '/frontend/keranjang.php');
 }
 
-$id_customer    = $_SESSION['id_customer'];
-$alamat         = sanitize($_POST['alamat'] ?? '');
-$nomor_telepon  = sanitize($_POST['nomor_telepon'] ?? '');
+$id_customer = $_SESSION['id_customer'];
+$alamat = sanitize($_POST['alamat'] ?? '');
+$nomor_telepon = sanitize($_POST['nomor_telepon'] ?? '');
+$metode_pembayaran = sanitize($_POST['metode_pembayaran'] ?? 'cod');
+
+// Validasi metode pembayaran
+if (!in_array($metode_pembayaran, ['cod', 'qris'])) {
+    $metode_pembayaran = 'cod';
+}
 
 if (empty($alamat) || empty($nomor_telepon)) {
     $_SESSION['error'] = 'Alamat dan nomor telepon harus diisi.';
@@ -46,14 +52,14 @@ try {
     }
 
     // Insert order
-    $stmt = $pdo->prepare("INSERT INTO orders (id_customer, total, status, alamat_pengiriman, nomor_telepon) VALUES (?, ?, 'pending', ?, ?)");
-    $stmt->execute([$id_customer, $total, $alamat, $nomor_telepon]);
+    $stmt = $pdo->prepare("INSERT INTO orders (id_customer, total, status, alamat_pengiriman, nomor_telepon, metode_pembayaran) VALUES (?, ?, 'pending', ?, ?, ?)");
+    $stmt->execute([$id_customer, $total, $alamat, $nomor_telepon, $metode_pembayaran]);
     $id_order = $pdo->lastInsertId();
 
     // Insert order details (stok belum dikurangi sampai status pesanan menjadi 'selesai')
     foreach ($cart_items as $item) {
         $subtotal = $item['harga'] * $item['jumlah'];
-        
+
         $stmt = $pdo->prepare("INSERT INTO order_details (id_order, id_product, jumlah, subtotal) VALUES (?, ?, ?, ?)");
         $stmt->execute([$id_order, $item['id_product'], $item['jumlah'], $subtotal]);
     }
@@ -65,12 +71,13 @@ try {
     $pdo->commit();
 
     $_SESSION['order_success'] = [
-        'id_order'     => $id_order,
+        'id_order' => $id_order,
         'order_number' => '#ORD-' . str_pad($id_order, 5, '0', STR_PAD_LEFT),
-        'total'        => $total,
-        'alamat'       => $alamat,
-        'nomor_telepon'=> $nomor_telepon,
-        'items_count'  => count($cart_items)
+        'total' => $total,
+        'alamat' => $alamat,
+        'nomor_telepon' => $nomor_telepon,
+        'metode_pembayaran' => $metode_pembayaran,
+        'items_count' => count($cart_items)
     ];
     $_SESSION['success'] = 'Pesanan berhasil dibuat! No. Pesanan: #ORD-' . str_pad($id_order, 5, '0', STR_PAD_LEFT);
     redirect($base_url . '/frontend/pesanan.php');

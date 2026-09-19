@@ -18,8 +18,8 @@ switch ($action) {
             redirect($base_url . '/frontend/subscription.php');
         }
 
-        $id_product    = (int)($_POST['id_product'] ?? 0);
-        $periode       = sanitize($_POST['periode'] ?? '');
+        $id_product = (int) ($_POST['id_product'] ?? 0);
+        $periode = sanitize($_POST['periode'] ?? '');
         $tanggal_mulai = sanitize($_POST['tanggal_mulai'] ?? '');
 
         if ($id_product <= 0 || empty($periode) || empty($tanggal_mulai)) {
@@ -40,7 +40,7 @@ switch ($action) {
         break;
 
     case 'cancel':
-        $id = (int)($_GET['id'] ?? 0);
+        $id = (int) ($_GET['id'] ?? 0);
 
         $stmt = $pdo->prepare("UPDATE subscriptions SET status = 'dibatalkan' WHERE id_subscription = ? AND id_customer = ?");
         $stmt->execute([$id, $id_customer]);

@@ -37,42 +37,52 @@ $customers = $pdo->query("
     <section class="content">
         <div class="container-fluid">
             <div class="card">
-                <div class="card-header" style="background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: #fff;">
-                    <h3 class="card-title" style="font-weight: 700;"><i class="fas fa-list mr-2"></i> Daftar Customer</h3>
+                <div class="card-header"
+                    style="background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: #fff;">
+                    <h3 class="card-title" style="font-weight: 700;"><i class="fas fa-list mr-2"></i> Daftar Customer
+                    </h3>
                 </div>
                 <div class="card-body p-0">
                     <div class="table-responsive">
                         <table class="table table-hover align-middle mb-0">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Nama</th>
-                                <th>Email</th>
-                                <th>Telepon</th>
-                                <th>Alamat</th>
-                                <th>Pesanan</th>
-                                <th>Subscription</th>
-                                <th>Tgl Daftar</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php foreach ($customers as $i => $cust): ?>
-                            <tr>
-                                <td><?= $i + 1 ?></td>
-                                <td><strong><?= htmlspecialchars($cust['nama']) ?></strong></td>
-                                <td><?= htmlspecialchars($cust['email']) ?></td>
-                                <td><?= htmlspecialchars($cust['nomor_telepon'] ?? '-') ?></td>
-                                <td style="max-width: 200px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="<?= htmlspecialchars($cust['alamat'] ?? '-') ?>"><?= htmlspecialchars($cust['alamat'] ?? '-') ?></td>
-                                <td><span class="badge badge-info" style="border-radius: 20px; padding: 0.3rem 0.6rem;"><?= $cust['total_order'] ?></span></td>
-                                <td><span class="badge badge-aktif" style="border-radius: 20px; padding: 0.3rem 0.6rem;"><?= $cust['total_subscription'] ?></span></td>
-                                <td><?= date('d M Y', strtotime($cust['created_at'])) ?></td>
-                            </tr>
-                            <?php endforeach; ?>
-                            <?php if (empty($customers)): ?>
-                            <tr><td colspan="8" class="text-center text-muted py-4">Belum ada customer</td></tr>
-                            <?php endif; ?>
-                        </tbody>
-                    </table>
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Nama</th>
+                                    <th>Email</th>
+                                    <th>Telepon</th>
+                                    <th>Alamat</th>
+                                    <th>Pesanan</th>
+                                    <th>Subscription</th>
+                                    <th>Tgl Daftar</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($customers as $i => $cust): ?>
+                                    <tr>
+                                        <td><?= $i + 1 ?></td>
+                                        <td><strong><?= htmlspecialchars($cust['nama']) ?></strong></td>
+                                        <td><?= htmlspecialchars($cust['email']) ?></td>
+                                        <td><?= htmlspecialchars($cust['nomor_telepon'] ?? '-') ?></td>
+                                        <td style="max-width: 200px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"
+                                            title="<?= htmlspecialchars($cust['alamat'] ?? '-') ?>">
+                                            <?= htmlspecialchars($cust['alamat'] ?? '-') ?></td>
+                                        <td><span class="badge badge-info"
+                                                style="border-radius: 20px; padding: 0.3rem 0.6rem;"><?= $cust['total_order'] ?></span>
+                                        </td>
+                                        <td><span class="badge badge-aktif"
+                                                style="border-radius: 20px; padding: 0.3rem 0.6rem;"><?= $cust['total_subscription'] ?></span>
+                                        </td>
+                                        <td><?= date('d M Y', strtotime($cust['created_at'])) ?></td>
+                                    </tr>
+                                <?php endforeach; ?>
+                                <?php if (empty($customers)): ?>
+                                    <tr>
+                                        <td colspan="8" class="text-center text-muted py-4">Belum ada customer</td>
+                                    </tr>
+                                <?php endif; ?>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>

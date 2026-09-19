@@ -396,6 +396,19 @@ function renderStatusBadge($status)
                                     <div class="text-muted" style="font-size: 0.9rem;">
                                         <i class="fas fa-phone mr-2 text-success"></i>
                                         <?= htmlspecialchars($order['nomor_telepon'] ?? '-') ?>
+                                        <?php
+                                        $wa_number = $order['nomor_telepon'] ?? '';
+                                        if (!empty($wa_number)) {
+                                            // Konversi 08xx ke 628xx untuk format WhatsApp
+                                            $wa_number = preg_replace('/^0/', '62', $wa_number);
+                                            $wa_number = preg_replace('/[^0-9]/', '', $wa_number);
+                                        ?>
+                                            <a href="https://wa.me/<?= $wa_number ?>" target="_blank" title="Hubungi via WhatsApp"
+                                                style="color: #25D366; margin-left: 6px; font-size: 1.1rem; transition: opacity 0.2s;"
+                                                onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">
+                                                <i class="fab fa-whatsapp"></i>
+                                            </a>
+                                        <?php } ?>
                                     </div>
                                 </div>
                             </div>
@@ -488,7 +501,15 @@ function renderStatusBadge($status)
                                         <tr style="border-bottom: 1px solid #f1f5f9;">
                                             <td style="padding: 10px 14px; vertical-align: middle;">
                                                 <div class="d-flex align-items-center">
-                                                    <i class="fas fa-box text-primary mr-2" style="opacity: 0.7;"></i>
+                                                    <?php if (!empty($item['gambar'])): ?>
+                                                        <img src="<?= $base_url ?>/assets/images/products/<?= htmlspecialchars($item['gambar']) ?>"
+                                                            alt="<?= htmlspecialchars($item['nama_produk']) ?>"
+                                                            style="width: 38px; height: 38px; object-fit: cover; border-radius: 6px; margin-right: 10px; border: 1px solid #e2e8f0;"
+                                                            onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';">
+                                                        <i class="fas fa-box text-primary mr-2" style="opacity: 0.7; display: none;"></i>
+                                                    <?php else: ?>
+                                                        <i class="fas fa-box text-primary mr-2" style="opacity: 0.7;"></i>
+                                                    <?php endif; ?>
                                                     <span
                                                         style="font-weight: 600; color: #1e293b;"><?= htmlspecialchars($item['nama_produk']) ?></span>
                                                 </div>

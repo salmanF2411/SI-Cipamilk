@@ -26,8 +26,13 @@
                     </li>
                     <li><a href="<?= $base_url ?>/frontend/subscription.php"><i class="fas fa-chevron-right"></i>
                             Subscription</a></li>
-                    <li><a href="<?= $base_url ?>/frontend/login.php"><i class="fas fa-chevron-right"></i> Login</a>
-                    </li>
+                    <?php if (isLoggedIn()): ?>
+                        <li><a href="<?= $base_url ?>/frontend/proses/proses_logout.php"><i
+                                    class="fas fa-chevron-right"></i> Logout</a></li>
+                    <?php else: ?>
+                        <li><a href="<?= $base_url ?>/frontend/login.php"><i class="fas fa-chevron-right"></i> Login</a>
+                        </li>
+                    <?php endif; ?>
                 </ul>
             </div>
 

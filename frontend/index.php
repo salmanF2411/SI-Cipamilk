@@ -30,7 +30,7 @@ require_once __DIR__ . '/../includes/header.php';
                     </h1>
                     <p class="hero-subtitle">
                         Nikmati produk olahan susu segar berkualitas langsung dari peternakan.
-                        Mulai dari susu murni, yogurt, keju, hingga es krim — semua dibuat dengan cinta untuk keluarga
+                        Mulai dari susu murni, yogurt, keju, hingga es krim. semua dibuat dengan cinta untuk keluarga
                         Indonesia.
                     </p>
                     <div class="hero-buttons">

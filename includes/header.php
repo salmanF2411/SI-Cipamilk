@@ -69,15 +69,17 @@ $current_page = basename($_SERVER['PHP_SELF'], '.php');
                         </a>
                     </li>
 
-                    <?php if (isLoggedIn() && $_SESSION['role'] === 'customer'): ?>
-                        <li class="nav-item">
-                            <a class="nav-link btn-nav-cart <?= $current_page === 'keranjang' ? 'active' : '' ?>"
-                                href="<?= $base_url ?>/frontend/keranjang.php" id="nav-cart-btn" title="Keranjang Belanja">
-                                <i class="fas fa-shopping-cart"></i>
-                                <span class="cart-badge" id="nav-cart-badge"
-                                    style="<?= $cart_count > 0 ? '' : 'display: none;' ?>"><?= $cart_count ?></span>
-                            </a>
-                        </li>
+                    <?php if (isLoggedIn()): ?>
+                        <?php if ($_SESSION['role'] === 'customer'): ?>
+                            <li class="nav-item">
+                                <a class="nav-link btn-nav-cart <?= $current_page === 'keranjang' ? 'active' : '' ?>"
+                                    href="<?= $base_url ?>/frontend/keranjang.php" id="nav-cart-btn" title="Keranjang Belanja">
+                                    <i class="fas fa-shopping-cart"></i>
+                                    <span class="cart-badge" id="nav-cart-badge"
+                                        style="<?= $cart_count > 0 ? '' : 'display: none;' ?>"><?= $cart_count ?></span>
+                                </a>
+                            </li>
+                        <?php endif; ?>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
                                 <i class="fas fa-user-circle mr-1"></i> <?= htmlspecialchars($_SESSION['nama']) ?>
